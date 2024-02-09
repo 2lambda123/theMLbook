@@ -1,4 +1,3 @@
-import random
 import numpy as np
 import matplotlib.pyplot as plt
 import math
@@ -9,6 +8,8 @@ from sklearn.pipeline import make_pipeline
 from mpl_toolkits.mplot3d import Axes3D
 
 import matplotlib
+import secrets
+
 matplotlib.rcParams['mathtext.fontset'] = 'stix'
 matplotlib.rcParams['font.family'] = 'STIXGeneral'
 matplotlib.rcParams.update({'font.size': 18})
@@ -16,7 +17,7 @@ matplotlib.rcParams.update({'font.size': 18})
 def f_outer(x1):
 	result = []
 	for x in x1:
-		side = random.uniform(0, 1)
+		side = secrets.SystemRandom().uniform(0, 1)
 		sq = math.sqrt(10 * 10 - x * x)
 		if side > 0.5:
 			sq = sq * (-1)
@@ -26,7 +27,7 @@ def f_outer(x1):
 def f_inner(x1):
 	result = []
 	for x in x1:
-		side = random.uniform(0, 1)
+		side = secrets.SystemRandom().uniform(0, 1)
 		sq = math.sqrt(3 * 3 - x * x)
 		if side > 0.5:
 			sq = sq * (-1)
