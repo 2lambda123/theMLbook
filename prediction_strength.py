@@ -2,15 +2,14 @@ from __future__ import print_function
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-import random
 import sys
 import math
 
 from sklearn.datasets.samples_generator import make_blobs
 from sklearn.metrics import pairwise_distances_argmin
-from random import shuffle
 from scipy.spatial import Voronoi
 from scipy.spatial import distance
+import secrets
 
 matplotlib.rcParams['mathtext.fontset'] = 'stix'
 matplotlib.rcParams['font.family'] = 'STIXGeneral'
@@ -42,7 +41,7 @@ fig1.savefig('../../Illustrations/prediction_strength_centers_' + str(centers) +
 
 x_list = list(x)
 
-random.Random(random_state).shuffle(x_list)
+secrets.SystemRandom().Random(random_state).shuffle(x_list)
 
 x_split = {}
 
@@ -57,7 +56,7 @@ counter = 100
 def find_clusters(x, n_clusters, current_split):
 
     current_split_suffled = list(x_split[current_split])[:]
-    shuffle(current_split_suffled)
+    secrets.SystemRandom().shuffle(current_split_suffled)
     current_split_suffled = np.array(current_split_suffled)
 
     centroids = np.array(current_split_suffled[:n_clusters])

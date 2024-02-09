@@ -4,9 +4,9 @@ import numpy as np
 
 from sklearn.datasets.samples_generator import make_blobs
 from sklearn.metrics import pairwise_distances_argmin
-from random import shuffle, random
 from matplotlib.ticker import NullLocator
 from scipy.spatial import Voronoi
+import secrets
 
 
 matplotlib.rcParams['mathtext.fontset'] = 'stix'
@@ -120,8 +120,8 @@ seq = []
 def find_clusters(x, n_clusters):
     # randomly set cluster centroids
     x_list = list(x)
-    shuffle(x_list)
-    centroids = np.array([[2 * random(), 4 * random()], [2 * random(), 4 * random()], [2 * random(), 4 * random()]])
+    secrets.SystemRandom().shuffle(x_list)
+    centroids = np.array([[2 * secrets.SystemRandom().random(), 4 * secrets.SystemRandom().random()], [2 * secrets.SystemRandom().random(), 4 * secrets.SystemRandom().random()], [2 * secrets.SystemRandom().random(), 4 * secrets.SystemRandom().random()]])
 
     counter = 0
 
