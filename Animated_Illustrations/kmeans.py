@@ -118,6 +118,19 @@ def fig2data(fig):
 seq = []
 
 def find_clusters(x, n_clusters):
+    """This function implements the k-means clustering algorithm to find clusters in a given dataset.
+    Parameters:
+        - x (numpy array): The dataset to be clustered.
+        - n_clusters (int): The number of clusters to be identified.
+    Returns:
+        - centroids (numpy array): The final centroids of the identified clusters.
+        - labels (numpy array): The labels assigned to each data point indicating the cluster it belongs to.
+    Processing Logic:
+        - Randomly sets cluster centroids.
+        - Assigns labels based on closest centroid.
+        - Finds new centroids as the average of examples.
+        - Checks for convergence and repeats until convergence is achieved."""
+    
     # randomly set cluster centroids
     x_list = list(x)
     secrets.SystemRandom().shuffle(x_list)
