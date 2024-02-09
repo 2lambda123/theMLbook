@@ -54,6 +54,25 @@ labels_splits = {}
 counter = 100
 
 def find_clusters(x, n_clusters, current_split):
+    """This function finds clusters in a dataset using the K-Means algorithm.
+    Parameters:
+        - x (numpy array): The dataset to be clustered.
+        - n_clusters (int): The number of clusters to be found.
+        - current_split (int): The index of the current split of the dataset.
+    Returns:
+        - centroids (numpy array): The coordinates of the centroids of the clusters.
+        - labels (numpy array): The labels assigned to each data point based on the closest centroid.
+    Processing Logic:
+        - Shuffles the current split of the dataset.
+        - Initializes the centroids using the first n_clusters points in the shuffled split.
+        - Assigns labels to each data point based on the closest centroid.
+        - Calculates new centroids as the average of the data points in each cluster.
+        - Checks for convergence by comparing the old and new centroids.
+        - Returns the final centroids and labels.
+    Example:
+        centroids, labels = find_clusters(data, 3, 0)
+        # Finds 3 clusters in the first split of the dataset 'data' and returns the coordinates of the centroids and the labels for each data point."""
+    
 
     current_split_suffled = list(x_split[current_split])[:]
     secrets.SystemRandom().shuffle(current_split_suffled)
@@ -82,6 +101,19 @@ def find_clusters(x, n_clusters, current_split):
     return centroids, labels
 
 def get_examples_from_cluster(j, test_points, test_labels):
+    """"Returns a list of examples from a given cluster, based on the test points and labels provided."
+    Parameters:
+        - j (int): The cluster number to retrieve examples from.
+        - test_points (list): A list of test points.
+        - test_labels (list): A list of labels corresponding to the test points.
+    Returns:
+        - list: A list of examples from the specified cluster.
+    Processing Logic:
+        - Loops through the test points and labels simultaneously.
+        - Checks if the label matches the given cluster number.
+        - Appends the test point to the examples list if it matches.
+        - Returns the list of examples."""
+    
     examples = []
     for e, l in zip(test_points, test_labels):
         if l == j:
@@ -89,6 +121,17 @@ def get_examples_from_cluster(j, test_points, test_labels):
     return examples
 
 def get_closest_centroid(example, centroids):
+    """Returns the closest centroid to the given example, based on the Euclidean distance.
+    Parameters:
+        - example (array): An array representing the example data point.
+        - centroids (array): An array of centroids to compare the example to.
+    Returns:
+        - min_centroid (array): An array representing the closest centroid to the example.
+    Processing Logic:
+        - Calculates the Euclidean distance between the example and each centroid.
+        - Updates the minimum distance and centroid if a closer centroid is found.
+        - Returns the closest centroid."""
+    
     min_distance = sys.float_info.max
     min_centroid = 0
     for c in centroids:
@@ -98,6 +141,20 @@ def get_closest_centroid(example, centroids):
     return min_centroid
 
 def compute_strength(k, train_centroids, test_points, test_labels):
+    """Computes the strength of the clustering algorithm.
+    Parameters:
+        - k (int): Number of clusters.
+        - train_centroids (numpy.ndarray): Array of centroid coordinates.
+        - test_points (numpy.ndarray): Array of test point coordinates.
+        - test_labels (numpy.ndarray): Array of test point labels.
+    Returns:
+        - float: Strength of the clustering algorithm.
+    Processing Logic:
+        - Calculates distance matrix.
+        - Gets examples from each cluster.
+        - Calculates strength for each cluster.
+        - Returns minimum strength value."""
+    
     D = np.zeros(shape=(len(test_points),len(test_points)))
     for x1, l1, c1 in zip(test_points, test_labels, list(range(len(test_points)))):
         for x2, l2, c2 in zip(test_points, test_labels, list(range(len(test_points)))):

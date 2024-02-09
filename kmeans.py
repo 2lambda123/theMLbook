@@ -105,6 +105,27 @@ def voronoi_finite_polygons_2d(vor, radius=None):
     return new_regions, np.asarray(new_vertices)
 
 def find_clusters(x, n_clusters):
+    """Function: find_clusters
+    Parameters:
+        - x (array): Array of data points to be clustered.
+        - n_clusters (int): Number of clusters to be formed.
+    Returns:
+        - centroids (array): Array of centroid coordinates for each cluster.
+        - labels (array): Array of labels for each data point indicating which cluster it belongs to.
+    Processing Logic:
+        - Randomly sets cluster centroids.
+        - Assigns labels based on closest centroid.
+        - Finds new centroids as the average of examples.
+        - Checks for convergence and breaks if centroids do not change.
+        - Returns the final centroids and labels for the data points.
+    Example:
+        centroids, labels = find_clusters(x, 3)
+        print(centroids)
+        print(labels)
+        # Output:
+        # [[1.234, 2.345], [4.567, 5.678], [3.456, 1.234]]
+        # [0, 1, 2, 1, 0, 2, 1, 0, 2, 1]"""
+    
     # randomly set cluster centroids
     x_list = list(x)
     secrets.SystemRandom().shuffle(x_list)

@@ -15,6 +15,18 @@ matplotlib.rcParams['font.family'] = 'STIXGeneral'
 matplotlib.rcParams.update({'font.size': 18})
 
 def f_outer(x1):
+	"""This function generates a list of square roots based on the input values, with a random sign assigned to each root.
+	Parameters:
+	- x1 (list): A list of input values.
+	Returns:
+	- result (numpy array): A numpy array containing the square roots of the input values, with random signs assigned.
+	Processing Logic:
+	- Generates a random sign for each square root.
+	- Calculates the square root of each input value.
+	- Assigns the random sign to the square root.
+	- Appends the square root to the result list.
+	- Converts the result list to a numpy array."""
+	
 	result = []
 	for x in x1:
 		side = secrets.SystemRandom().uniform(0, 1)
@@ -25,6 +37,18 @@ def f_outer(x1):
 	return np.asarray(result)
 
 def f_inner(x1):
+	"""This function calculates the square root of the difference between 3 squared and the given input value, and appends it to a list. It then returns the list as a NumPy array.
+	Parameters:
+	- x1 (list): A list of input values.
+	Returns:
+	- result (NumPy array): An array containing the calculated square root values.
+	Processing Logic:
+	- Generates a random number between 0 and 1 using the secrets module.
+	- Calculates the square root of 3 squared minus the input value.
+	- If the random number is greater than 0.5, the calculated value is multiplied by -1.
+	- The calculated value is then appended to the result list.
+	- The result list is converted to a NumPy array and returned."""
+	
 	result = []
 	for x in x1:
 		side = secrets.SystemRandom().uniform(0, 1)
